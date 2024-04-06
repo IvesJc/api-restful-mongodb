@@ -1,6 +1,7 @@
 package com.ives.apirestfulmongodb.service;
 
 import com.ives.apirestfulmongodb.domain.User;
+import com.ives.apirestfulmongodb.dto.UserDTO;
 import com.ives.apirestfulmongodb.repository.UserRepository;
 import com.ives.apirestfulmongodb.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +24,15 @@ public class UserService {
         Optional<User> user = userRepo.findById(id);
         return user.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
+
+    public User insert(User user){
+        return userRepo.insert(user);
+    }
+
+    public User fromDTO(UserDTO userDTO){
+        return new User(userDTO.getId(),
+                        userDTO.getName(),
+                        userDTO.getEmail());
+    }
+
 }
