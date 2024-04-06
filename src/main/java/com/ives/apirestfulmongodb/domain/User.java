@@ -1,10 +1,16 @@
 package com.ives.apirestfulmongodb.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Document(collection = "user")
+// collection = "NOME DA COLEÇÃO DO MONGODB"
 public class User implements Serializable {
 
+    @Id
     private String id;
     private String name;
     private String email;
