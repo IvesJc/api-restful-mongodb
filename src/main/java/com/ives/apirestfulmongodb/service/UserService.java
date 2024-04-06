@@ -29,10 +29,14 @@ public class UserService {
         return userRepo.insert(user);
     }
 
-    public User fromDTO(UserDTO userDTO){
-        return new User(userDTO.getId(),
-                        userDTO.getName(),
-                        userDTO.getEmail());
+    public void delete(String id){
+        findById(id);
+        userRepo.deleteById(id);
     }
 
+    public User fromDTO(UserDTO userDTO){
+        return new User(userDTO.getId(),
+                userDTO.getName(),
+                userDTO.getEmail());
+    }
 }
