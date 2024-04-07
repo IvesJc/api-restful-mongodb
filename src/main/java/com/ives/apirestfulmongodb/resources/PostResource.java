@@ -5,6 +5,7 @@ import com.ives.apirestfulmongodb.domain.Post;
 import com.ives.apirestfulmongodb.domain.User;
 import com.ives.apirestfulmongodb.dto.UserDTO;
 import com.ives.apirestfulmongodb.repository.PostRepository;
+import com.ives.apirestfulmongodb.resources.util.URL;
 import com.ives.apirestfulmongodb.service.UserService;
 import com.ives.apirestfulmongodb.service.exception.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,13 @@ public class PostResource {
         return ResponseEntity.ok().body(post);
     }
 
+    @RequestMapping(value = "/titlesearch", method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text", defaultValue = "") String text){
+        // Identifica o que é passado no text, e se nada for passado, será considerado uma String vazia
+        text = URL.decodeParam(text);
+        List<Post> list = postService.findByTitle(text);
+        return ResponseEntity.ok().body(list);
+
+    }
 
 }
